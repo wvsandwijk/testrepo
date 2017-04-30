@@ -3,6 +3,7 @@ layout: post
 title:  "Welcome to Jekyll!"
 date:   2017-04-30 
 categories: jekyll update1
+tags : powershell
 ---
 Some post with code
 
