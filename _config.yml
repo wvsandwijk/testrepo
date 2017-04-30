@@ -14,5 +14,9 @@ url: "https://wvsandwijk.github.io/" # the base hostname & protocol for your sit
 twitter_username: wvsandwijk
 github_username:  wvsandwijk
 
+# Where are tags and categories displayed
+tag_page: '/tags/'
+category_page: '/categories/'
+
 # Build settings
 markdown: kramdown
