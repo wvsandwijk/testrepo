@@ -9,8 +9,8 @@
 title: TestRepo
 email: wessel@vansandwijk.nl
 description:  This is a testRepo for yekyll
-baseurl: "/" # the subpath of your site, e.g. /blog
-#url: "http://wvsandwijk.github.io/testrepo" # the base hostname & protocol for your site
+baseurl: "/testrepo" # the subpath of your site, e.g. /blog
+url: "https://wvsandwijk.github.io/" # the base hostname & protocol for your site
 twitter_username: wvsandwijk
 github_username:  wvsandwijk
 
