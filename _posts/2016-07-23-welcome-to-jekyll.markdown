@@ -2,7 +2,7 @@
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2017-04-30 
-categories: jekyll update
+categories: jekyll update1
 ---
 Some post with code
 
