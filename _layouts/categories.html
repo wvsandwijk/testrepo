@@ -3,11 +3,15 @@ layout: default
 ---
 
 <h2>Categories:</h2>
-<div class="categories"> 
+<article class="post card">
+<div class="card-content">
+  <div class="categories"> 
 {% for catitem in site.categories  %} 
   <a href="#{{ catitem[0] }}">{{  catitem[0] }}</a>
 {% endfor %}
+  </div>
 </div>
+</article>
 
 <!-- iterate through all categories on the site --> 
 {% for catitem in site.categories %} 
