@@ -1,4 +1,5 @@
 # Jekyll template 01
+
 Light and beautiful blog style template for jekyll
 
 [![Gitter](https://badges.gitter.im/nikrich/jekyll-slender-template.svg)](https://gitter.im/nikrich/jekyll-slender-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -7,6 +8,7 @@ Light and beautiful blog style template for jekyll
 ![preview](http://i.imgur.com/UzW9sxd.jpg)
 
 ## Demo
+
 Find a demo [here](http://nikrich.github.io/jekyll-wing-template/#)
 
 ## Contributing
