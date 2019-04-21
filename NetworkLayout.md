@@ -20,6 +20,6 @@ My Network Layout
      AUDIO  PS4  APPLETV    HOMELAB    HOMELAB
 
 
-:/. = Wireless/MeSH connection
-|/- = Wired Connection
+: or . = Wireless/MeSH connection
+| or ─ = Wired Connection
 ````
