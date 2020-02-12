@@ -36,6 +36,8 @@ puts markdown.to_html
 
 ## JAVA
 
+Hello world
+
 ```` Java
 
 public class MyClass {
