@@ -5,28 +5,31 @@ online version: http://www.hp.com/go/powershell
 schema: 2.0.0
 ---
 
-# Get-HPiLOPowerOnTime
+# Enable-HPiLOSecurityMessage
 
 ## SYNOPSIS
-Gets the virtual clock value, in minutes, since the server was last powered on.
+Enables the security text message in the iLO Login Banner.
 (C) Copyright 2013, 2014 Hewlett-Packard Development Company, L.P.
 
 ## SYNTAX
 
 ```
-Get-HPiLOPowerOnTime [-OutputType <String>] [-Username <Object>] [-Password <Object>] [-Credential <Object>]
- [-Force] [-Server <Object>] [<CommonParameters>]
+Enable-HPiLOSecurityMessage [-OutputType <String>] [-Username <Object>] [-Password <Object>]
+ [-Credential <Object>] [-Force] [-Server <Object>] [-Message <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-HPiLOPowerOnTime cmdlet gets the virtual clock value, in minutes, since the server was last powered on.
-A list of servers(with or without port number) and corresponding username/password or credential values must be provided as parameters.
+The Enable-HPiLOSecurityMessage cmdlet enables the security text message in the iLO Login Banner.
+The Login Security Banner feature enables you to configure the security banner displayed on the iLO login screen.
+The message on the security banner can be modified using this command.
+You must have configure iLO Setting privileges to make changes to the banner.
+A list of servers(with or without port number) and corresponding username/password or credential and asset tag values must be provided as parameters.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> Get-HPiLOPowerOnTime
+PS C:\> Enable-HPiLOSecurityMessage
 Please enter Server IP or Hostname: 1.4.217.131,187
 Do you want to add details for another server?(Y/N) : y
 Please enter Server IP or Hostname: 1.4.209.53
@@ -50,33 +53,22 @@ Enter Password for 1.4.217.131: ************
 Enter Password for 1.4.217.187: ************
 Enter Password for 1.4.209.53: ************
 
-IP                      : 1.4.217.131
-HOSTNAME                : iloqwc.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 304310
-
-IP                      : 1.4.217.187
-HOSTNAME                : ilo.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 249848
-
-IP                      : 1.4.209.53
-HOSTNAME                : ilomxq.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 385465
+Security Message is not provided for the following iLO Server(s):
+1.4.217.131
+1.4.217.187
+1.4.209.53
+Use same Security message value for these servers? (Y/N) : Y
+Please enter Security Message: administrator
 ```
 
-This command shows a basic usage scenario where only the cmdlet name is entered.
+This example shows a basic usage scenario where only the cmdlet name is entered.
 You are asked if the same credentials are to be used for multiple input servers or if separate credentials have to be collected for each server.
 Then you are asked if the same values for parameters are to be passed to the cmdlets or separate parameters are going to be used for each server.
 A list of iLO details is passed to the cmdlet in the form of PowerShell object or list of PowerShell objects or list of IP addresses of the iLO.
 
 ### EXAMPLE 2
 ```
-PS C:\> Get-HPiLOPowerOnTime -Server $Server
+PS C:\> Enable-HPiLOSecurityMessage -Server $Server -Message $message
 
 Username is not provided for the following iLO Server(s):
 1.4.217.131
@@ -91,55 +83,18 @@ Password is not provided for the following iLO Server(s):
 1.4.209.53
 Use same Password for these servers? (Y/N) : Y
 Please enter Password : ************
-
-IP                      : 1.4.217.131
-HOSTNAME                : iloqwc.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 304310
-
-IP                      : 1.4.217.187
-HOSTNAME                : ilo.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 249848
-
-IP                      : 1.4.209.53
-HOSTNAME                : ilomxq.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 385465
 ```
 
-$Server is passed as parameter to Get-HPiLOPowerOnTime.
+$Server is passed as parameter to Enable-HPiLOSecurityMessage.
 It can be a string array having iLO IP addresses in string format or it can be an array of PowerShell objects having iLO details including IP address. 
 Because the username and passwords are not provided for the iLOs, you are asked to input these values.
 
 ### EXAMPLE 3
 ```
-PS C:\> Get-HPiLOPowerOnTime -Server $Server -Username $Username -Password $Password
-
-
-IP                      : 1.4.217.131
-HOSTNAME                : iloqwc.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 304310
-
-IP                      : 1.4.217.187
-HOSTNAME                : ilo.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 249848
-
-IP                      : 1.4.209.53
-HOSTNAME                : ilomxq.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 385465
+PS C:\> Enable-HPiLOSecurityMessage -Server $Server -Username $Username -Password $Password -Message $message
 ```
 
-This command shows that the list of iLO server addresses is passed as a parameter along with usernames and passwords.
+This example shows that the list of iLO server addresses is passed as a parameter along with usernames, passwords and security message values.
 
 ## PARAMETERS
 
@@ -149,7 +104,7 @@ The PowerShell object may contain fields such as IP Address, Hostname, spn, fwri
 The object may also contain the userid and password required to access the iLO.
 A range of iLO IPs can also be provided in the same string.
 IPv6 values for IP address can be used on iLO3 firmware version 1.70 and later and also on iLO4 firmware version 1.40 and later.
-Following are examples of server parameters:
+Following are examples of Server parameters:
 
 Example 1. 
 $serverSet1 = "81.2.84.150"
@@ -240,6 +195,21 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -Message
+This will be the security message that will be displayed to the users in the iLO login banner.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -OutputType
 Specifies the type of required output.
 Possible value can be ExternalCommand, XML, RIBCL or PSObject.
@@ -259,7 +229,7 @@ Accept wildcard characters: False
 
 ### -Force
 Suppresses the prompt that asks for a required parameter.
-Without this parameter, Get-HPiLOPowerOnTime requires you to provide the values of all required parameters.
+Without this parameter, Enable-HPiLOSecurityMessage requires you to provide the values of all required parameters.
 
 ```yaml
 Type: SwitchParameter

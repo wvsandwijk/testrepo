@@ -5,28 +5,39 @@ online version: http://www.hp.com/go/powershell
 schema: 2.0.0
 ---
 
-# Get-HPiLOPowerOnTime
+# Add-HPiLOSSORecord
 
 ## SYNOPSIS
-Gets the virtual clock value, in minutes, since the server was last powered on.
+Add a new HP SIM Single Sign-On (SSO) Server Record.
 (C) Copyright 2013, 2014 Hewlett-Packard Development Company, L.P.
 
 ## SYNTAX
 
 ```
-Get-HPiLOPowerOnTime [-OutputType <String>] [-Username <Object>] [-Password <Object>] [-Credential <Object>]
- [-Force] [-Server <Object>] [<CommonParameters>]
+Add-HPiLOSSORecord [-OutputType <String>] [-Username <Object>] [-Password <Object>] [-Credential <Object>]
+ [-Force] [-Server <Object>] [-SSOInputType <Object>] [-SSOInputValue <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-HPiLOPowerOnTime cmdlet gets the virtual clock value, in minutes, since the server was last powered on.
-A list of servers(with or without port number) and corresponding username/password or credential values must be provided as parameters.
+The Add-HPiLOSSORecord cmdlet adds an HP SIM Single Sign-On (SSO) server record to the end of the database on iLO.
+Duplicate records might be rejected and generate an error.
+A list of servers(with or without port number) and corresponding username/password or credential, SSOInputType and SSOInputValue values must be provided as parameters.
+
+There are three ways to add an HP SIM Trusted Server record using the Add-HPiLOSSOServer command:
+• The server can be specified by network name (requires SSO trust level set to trust by name or trust all, but is not supported for trust by certificate).
+Use the fully qualified network name.
+• The server certificate can be imported by iLO 4 (the LOM processor requests the certificate from the specified HP SIM server using anonymous HTTP request).
+The iLO 4 processor must be able to contact the HP SIM server on the network at the time this command is processed for this method to work.
+• The server certificate can be directly installed on iLO 4.
+However, you must obtain the x.509 certificate in advance.
+This method enables you to configure the iLO 4 in advance of placing it on the network with the HP SIM server.
+The method also enables you to verify the contents of the HP SIM server certificate.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-PS C:\> Get-HPiLOPowerOnTime
+PS C:\> Add-HPiLOSSORecord
 Please enter Server IP or Hostname: 1.4.217.131,187
 Do you want to add details for another server?(Y/N) : y
 Please enter Server IP or Hostname: 1.4.209.53
@@ -50,23 +61,21 @@ Enter Password for 1.4.217.131: ************
 Enter Password for 1.4.217.187: ************
 Enter Password for 1.4.209.53: ************
 
-IP                      : 1.4.217.131
-HOSTNAME                : iloqwc.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 304310
+SSOInputType is not provided for the following iLO Server(s):
+1.4.217.131
+1.4.217.187
+1.4.209.53
+Use same SSOInputType value for these servers? (Y/N) : y
+Please enter SSOInputType : NETWORK
 
-IP                      : 1.4.217.187
-HOSTNAME                : ilo.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 249848
-
-IP                      : 1.4.209.53
-HOSTNAME                : ilomxq.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 385465
+SSOInputValue is not provided for the following iLO Server(s):
+1.4.217.131
+1.4.217.187
+1.4.209.53
+Use same SSOInputValue value for these servers? (Y/N) : N
+Enter SSOInputValue for 1.4.217.187: ilo32165.company.net
+Enter SSOInputValue for 1.4.217.187: ilo20903.company.net
+Enter SSOInputValue for 1.4.209.53: ilo2345.us.company.net
 ```
 
 This command shows a basic usage scenario where only the cmdlet name is entered.
@@ -76,70 +85,20 @@ A list of iLO details is passed to the cmdlet in the form of PowerShell object o
 
 ### EXAMPLE 2
 ```
-PS C:\> Get-HPiLOPowerOnTime -Server $Server
-
-Username is not provided for the following iLO Server(s):
-1.4.217.131
-1.4.217.187
-1.4.209.53
-Use same Username for these servers? (Y/N) : Y
-Please enter Username : alansmith
-
-Password is not provided for the following iLO Server(s):
-1.4.217.131
-1.4.217.187
-1.4.209.53
-Use same Password for these servers? (Y/N) : Y
-Please enter Password : ************
-
-IP                      : 1.4.217.131
-HOSTNAME                : iloqwc.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 304310
-
-IP                      : 1.4.217.187
-HOSTNAME                : ilo.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 249848
-
-IP                      : 1.4.209.53
-HOSTNAME                : ilomxq.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 385465
+PS C:\> Add-HPiLOSSORecord -Server $Server -Username $Username -Password $Password -SSOInputType "NETWORK" -SSOInputValue "hp01.company.net"
 ```
 
-$Server is passed as parameter to Get-HPiLOPowerOnTime.
-It can be a string array having iLO IP addresses in string format or it can be an array of PowerShell objects having iLO details including IP address. 
-Because the username and passwords are not provided for the iLOs, you are asked to input these values.
+This command takes parameters for SSO Input Type and SSO Input values.
+$Username and $Password contain list of credentials for accessing/modifying the iLO. 
+$Server is a set of server details piped to the cmdlet.
+It can be a string, an array of strings, a PowerShell object with IP address and other server details or an array of PowerShell objects with IP addresses and other details
 
 ### EXAMPLE 3
 ```
-PS C:\> Get-HPiLOPowerOnTime -Server $Server -Username $Username -Password $Password
-
-
-IP                      : 1.4.217.131
-HOSTNAME                : iloqwc.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 304310
-
-IP                      : 1.4.217.187
-HOSTNAME                : ilo.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 249848
-
-IP                      : 1.4.209.53
-HOSTNAME                : ilomxq.company.net
-STATUS_TYPE             : OK
-STATUS_MESSAGE          : OK
-SERVER_POWER_ON_MINUTES : 385465
+PS C:\> Add-HPiLOSSORecord -Server $Server -Username $Username -Password $Password -SSOInputType "NETWORK" -SSOInputValue "hp01.company.net"
 ```
 
-This command shows that the list of iLO server addresses is passed as a parameter along with usernames and passwords.
+This command shows that the list of iLO server addresses is passed as a parameter along with usernames, passwords, and required parameters.
 
 ## PARAMETERS
 
@@ -240,6 +199,46 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -SSOInputType
+Secifies the method of adding an HP SIM SSO server record by network Name, by indirect import or by direct certificate import. 
+Allowed values are NETWORK, IMPORT_FROM_NETWORK or IMPORT_CERTIFICATE
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -SSOInputValue
+Specifies the server name in case of adding SSO record by network name if SSOInputType is set as NETWORK.
+OR
+Specifies the server to import from in case of adding SSO Record from by importing from another server if SSOInputType is set as IMPORT_FROM_NETWORK.
+OR
+Specifies the x.509 DER encoded certificate data you specify is added by iLO if SSOInputType is set as IMPORT_CERTIFICATE. 
+You must include the lines of the certificate including the opening and closing lines
+The certificate is validated by iLO to ensure that it can be decoded before it is stored.
+An error results if the certificate is a duplicate or corrupt.
+The iLO firmware does not support certificate revocation and does not honor certificates that appear expired.
+You must remove revoked or expired certificates.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -OutputType
 Specifies the type of required output.
 Possible value can be ExternalCommand, XML, RIBCL or PSObject.
@@ -259,7 +258,7 @@ Accept wildcard characters: False
 
 ### -Force
 Suppresses the prompt that asks for a required parameter.
-Without this parameter, Get-HPiLOPowerOnTime requires you to provide the values of all required parameters.
+Without this parameter, Add-HPiLOSSORecord requires you to provide the values of all required parameters.
 
 ```yaml
 Type: SwitchParameter
