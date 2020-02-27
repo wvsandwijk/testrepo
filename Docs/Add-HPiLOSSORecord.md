@@ -5,6 +5,8 @@ online version: http://www.hp.com/go/powershell
 schema: 2.0.0
 ---
 
+[TOC]
+
 # Add-HPiLOSSORecord
 
 ## SYNOPSIS
