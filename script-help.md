@@ -1,30 +1,28 @@
 # My Scripting Help
 
-```` Text
+```text
   ___         _      _   _
  / __| __ _ _(_)_ __| |_(_)_ _  __ _
  \__ \/ _| '_| | '_ \  _| | ' \/ _` |
  |___/\__|_| |_| .__/\__|_|_||_\__, |
                |_|             |___/
-````
+```
 
 ## Powershell
 
-```` Powershell
+```text
 Get-Hardisk -vm <SomeVMName> -Name <theName ofDisk> | Remove-Hardisk
-````
+```
 
 ## JSON
 
-```` JSON
-
+```javascript
 {
     "name":"John",
     "age":30,
     "cars":[ "Ford", "BMW", "Fiat" ]
 }
-
-````
+```
 
 ## RUBY
 
@@ -36,12 +34,11 @@ puts markdown.to_html
 
 ## JAVA
 
-```` Java
-
+```java
 public class MyClass {
   public static void main(String[] args) {
     System.out.println("Hello World");
   }
 }
+```
 
-````

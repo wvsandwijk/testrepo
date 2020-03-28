@@ -2,8 +2,7 @@
 
 My Network Layout
 
-```` Text
-
+```text
                 ISP ROUTER
                     |
                     |
@@ -22,4 +21,5 @@ My Network Layout
 
 : or . = Wireless/MeSH connection
 | or ─ = Wired Connection
-````
+```
+
