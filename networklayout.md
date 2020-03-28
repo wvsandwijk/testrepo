@@ -4,12 +4,15 @@ My Network Layout
 
 ```text
                 ISP ROUTER
+                 FIREWALL
                     |
-                    |
-            .... AMPLIFI ....
-            :      | |      :
-            :      | |      :
-        AMPLIFI AP | |  AMPLIFI AP
+               USG FIREWALL
+                    |                    
+                U SWITCH ──────────── FAST WIFI
+                   | |           .......: :........
+                   | |           :                :
+                   | |       WIFI MESH        WIFI MESH
+                   | |
                    | |
                    | |
             ┌──────┘ └──────┐
