@@ -15,8 +15,8 @@ My Network Layout
                    | |
                    | |
                    | |
-            ┌──────┘ └──────┐
-            |               |
+            ┌──────┘ └─────────┐
+            |                  |
        ┌── SWITCH ──┐       SWITCH ──── SWITCH
        |     |      |          |          |
      AUDIO  PS4  APPLETV    HOMELAB    HOMELAB
