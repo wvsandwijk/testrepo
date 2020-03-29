@@ -2,9 +2,22 @@
 description: Page Description15
 ---
 
-# Clean Readme.md
+# How to use this gitbook
 
-{% file src=".gitbook/assets/run.txt" caption="Run.txt file" %}
+{% hint style="success" %}
+INFORMATION
+{% endhint %}
 
+{% tabs %}
+{% tab title="Employee" %}
+| Name | Gender | Output | Income |
+| :--- | :--- | :--- | :--- |
+| Conner, JC \(John\) | Male | Nevada | $ 4000,00 |
+| Conner, S \(Sarah\) | Female | Nevada | $ 3950,00 |
+{% endtab %}
 
+{% tab title="Examples" %}
+![](.gitbook/assets/20160915_165757000_ios.jpg)
+{% endtab %}
+{% endtabs %}
 

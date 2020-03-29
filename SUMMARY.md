@@ -1,6 +1,13 @@
 # Table of contents
 
-* [Clean Readme.md](README.md)
-* [Network Layout](networklayout.md)
-* [My Scripting Help](script-help.md)
+* [How to use this gitbook](README.md)
+
+## Introduction
+
+* [Untitled](introduction/untitled.md)
+
+## Examples
+
+* [My Scripting Help](examples/script-help.md)
+* [Network Layout](examples/networklayout.md)
 
